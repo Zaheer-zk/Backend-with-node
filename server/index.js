@@ -2,7 +2,8 @@ const http = require('http');
 const fs = require('fs');
 
 const myServer = http.createServer((req, res) => {
-  const log = `${Date.now()} - ${req.url}`;
+  // console.log('req: ', req);
+  const log = `${Date.now()} : New request received on URL - ${req.url} \n`;
   fs.appendFile('log.txt', log, (err, data) => {
     switch (req.url) {
       case '/':
