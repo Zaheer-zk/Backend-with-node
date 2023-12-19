@@ -1,0 +1,15 @@
+{
+  "name": "REST-API",
+  "version": "1.0.0",
+  "description": "REST APi Learnings Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zaheer Khan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
