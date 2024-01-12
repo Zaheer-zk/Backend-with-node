@@ -1,14 +1,36 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const mongoose = require('mongoose');
 const PORT = 8000;
 const users = require('./MOCK_DATA.json');
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 
+//mongodb server connection
+mongoose
+  .connect('mongodb://127.0.0.1:27017/testDB')
+  .then(() => {
+    console.log('mongodb server connection established');
+  })
+  .catch((err) => console.log('Mongoose connection error: ' + err));
+
+//User Schema
+const userSchema = new mongoose.Schema(
+  {
+    firstName: { type: 'string', require: true },
+    lastName: { type: 'string', require: true },
+    email: { type: 'string', require: true, unique: true },
+  },
+  { timestamps: true }
+);
+
+// User model
+const User = mongoose.model('user', userSchema);
+
 //* ROUTES *
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
   // GET all users
   return res.json(users);
 });
@@ -16,10 +38,12 @@ app.get('/users', (req, res) => {
 app.post('/api/user', (req, res) => {
   const body = req.body;
   console.log(body);
-  users.push({ ...body, id: users.length + 1 });
-  fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
-    return res.json({ status: 'Created user with id : ' + users.length });
-  });
+  // users.push({ ...body, id: users.length + 1 });
+  // fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err, data) => {
+  //   return res.json({ status: 'Created user with id : ' + users.length });
+  // });
+
+  //create a new user by server
 });
 
 // multiple routes handling

@@ -8,5 +8,8 @@
     "start": "node app.js"
   },
   "author": "Zaheer__zk",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@quranjs/api": "^1.7.1"
+  }
 }
